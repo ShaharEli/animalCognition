@@ -13,6 +13,7 @@ interface IProps {
   setGeneration: React.Dispatch<React.SetStateAction<number>>;
   rate: number;
   trackingSimulation?: boolean;
+  isSimulation?: boolean;
 }
 const CREATURES_INITIAL_AMOUNT = 100;
 const FOOD_AMOUNT = 100;
@@ -25,6 +26,7 @@ function Simulation({
   setGeneration,
   rate,
   trackingSimulation,
+  isSimulation,
 }: IProps) {
   const population = useMemo(
     () => new Population(CREATURES_INITIAL_AMOUNT, rate),
@@ -68,7 +70,8 @@ function Simulation({
       <h2 className="mx-auto my-2 text-center">Gen: {generation}</h2>
       <div className="">
         <Canvas
-          onDataMode={onDataMode}
+          isSimulation={isSimulation}
+          onDataMode={onDataMode && !isSimulation}
           population={population}
           food={food}
           setGeneration={setGeneration}

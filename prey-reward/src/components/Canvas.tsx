@@ -1,7 +1,7 @@
 import { Creature } from "classes";
 import { Food } from "classes/Food";
 import { Population } from "classes/Population";
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 
 interface IProps {
   population: Population;
@@ -9,6 +9,7 @@ interface IProps {
   setGeneration: React.Dispatch<React.SetStateAction<number>>;
   onDataMode: boolean;
   trackingSimulation?: boolean;
+  isSimulation?: boolean;
 }
 const Canvas = ({
   population,
@@ -16,27 +17,31 @@ const Canvas = ({
   setGeneration,
   onDataMode,
   trackingSimulation,
+  isSimulation,
 }: IProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const draw = async (ctx: CanvasRenderingContext2D, frameCount: number) => {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    population.draw(ctx);
-    food.draw(ctx);
-    if (frameCount % (onDataMode ? 2 : 100) === 0) {
+  const draw = useCallback(
+    async (ctx: CanvasRenderingContext2D, frameCount: number) => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      food.draw(ctx);
-      population.moveToFood(food);
       population.draw(ctx);
-      population.placeRandom(ctx);
-      population.decide();
-      await new Promise((resolve) => {
-        if (trackingSimulation) {
-          setGeneration((p: number) => p + 1);
-        }
-        setTimeout(resolve, onDataMode ? 2 : 2000);
-      });
-    }
-  };
+      food.draw(ctx);
+      if (frameCount % (onDataMode ? 2 : 100) === 0) {
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        food.draw(ctx);
+        population.moveToFood(food);
+        population.draw(ctx);
+        population.placeRandom(ctx);
+        population.decide();
+        await new Promise((resolve) => {
+          if (trackingSimulation) {
+            setGeneration((p: number) => p + 1);
+          }
+          setTimeout(resolve, onDataMode ? 2 : 2000);
+        });
+      }
+    },
+    [food, onDataMode, population, setGeneration, trackingSimulation]
+  );
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -59,11 +64,11 @@ const Canvas = ({
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, [population, food]);
+  }, [population, food, draw]);
   return (
     <canvas
-      width={500}
-      height={500}
+      width={isSimulation ? 650 : 500}
+      height={isSimulation ? 650 : 500}
       ref={canvasRef}
       className=" border-black border-2 mx-auto"
     />
