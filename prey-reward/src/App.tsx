@@ -45,18 +45,22 @@ const App = () => {
   }, [generation]);
 
   return (
-    <div className="font-heebo-bold">
-      <div className="flex gap-3 mb-4">
+    <div className="text-xl font-heebo">
+      <div className="flex gap-3 mb-4 items-center justify-center">
         {mode === "data" && (
           <div
-            className="cursor-pointer  p-4 mt-4 flex justify-center items-center bg-gray-600 w-fit h-fit text-white"
+            className={`cursor-pointer p-4 mt-4 flex justify-center
+            ${mode !== "data" ? "mx-auto" : "mx-2"}  
+            items-center bg-gray-600 w-fit h-fit text-white`}
             onClick={exportData}
           >
             Download
           </div>
         )}
         <div
-          className="cursor-pointer p-4 mx-2 mt-4 flex justify-center items-center bg-gray-600 w-fit h-fit text-white"
+          className={`cursor-pointer p-4 ${
+            mode === "simulation" ? "mx-auto" : "mx-2"
+          } mt-4 flex justify-center items-center bg-gray-600 w-fit h-fit text-white`}
           onClick={async () => {
             setData({});
             setGeneration(1);
@@ -74,6 +78,7 @@ const App = () => {
         <label className="mx-2">percent of aggressive</label>
         <input
           placeholder={`${rate * 100}%`}
+          className="p-1 w-12"
           type="number"
           onChange={(e) => {
             setGeneration(1);

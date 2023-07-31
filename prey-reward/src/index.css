@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Heebo Medium";
+    font-weight:400;
+    src: url("./assets/Fonts/Heebo-Medium.ttf");
+}
+@font-face {
+    font-family: "Heebo";
+    src: url("./assets/Fonts/Heebo-Regular.ttf");
+}
+@font-face {
+    font-family: "Ubuntu Medium";
+    font-weight:400;
+    src: url("./assets/Fonts/Ubuntu-Medium.ttf");
+}
+@font-face {
+    font-family: "Ubuntu Bold";
+    font-weight:700;
+    src: url("./assets/Fonts/Ubuntu-Bold.ttf");
+}
