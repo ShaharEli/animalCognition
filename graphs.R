@@ -17,7 +17,25 @@ plot1 = ggplot(df, aes(x = Generation, y = (`Aggressive Amount` + `Friendly Amou
   theme_minimal()
 plot1
 
-# The same structure follows for plot2 and plot3
+
+plot2 = ggplot(df, aes(x = Generation, y = (`Aggressive Amount` + `Friendly Amount`) , color = factor(`Aggressive Ratio`))) +
+  stat_summary(fun = mean, geom = "line") +xlim(0,100) +
+  labs(title = "Mean population size over 100 generations",
+       x = "Generation",
+       y = "Mean population size",
+       color = "Aggressive Ratio") +
+  theme_minimal()
+plot2
+
+plot3 = ggplot(df, aes(x = Generation, y = (`Aggressive Amount` + `Friendly Amount`) , color = factor(`Aggressive Ratio`))) +
+  stat_summary(fun = mean, geom = "line") +xlim(0,25) +
+  labs(title = "Mean population size over 25 generations",
+       x = "Generation",
+       y = "Mean population size",
+       color = "Aggressive Ratio") +
+  theme_minimal()
+plot3
+
 
 plot4=ggplot(df, aes(x = Generation, y = `Aggressive Amount`, color = factor(`Aggressive Ratio`))) +
   stat_summary(fun = mean, geom = "line") +
@@ -40,3 +58,27 @@ plot5=ggplot(df, aes(x = Generation, y = `Friendly Amount`, color = factor(`Aggr
        color = "Aggressive Ratio") +
   theme_minimal()
 plot5
+
+plot6=ggplot(df, aes(x = Generation, y = `Aggressive Amount`, color = factor(`Aggressive Ratio`))) +
+  stat_summary(fun = mean, geom = "line") +
+  xlim(0,50)+ geom_hline(yintercept = agg_mean, linetype="dotted") +
+  annotate("text", x = max(df$Generation), y = agg_mean, label = round(agg_mean, 2), hjust = 1.5) +
+  labs(title = "Mean aggressive amount over generations",
+       x = "Generation",
+       y = "Mean aggressive amount",
+       color = "Aggressive Ratio") +
+  theme_minimal()
+plot6
+
+plot7=ggplot(df, aes(x = Generation, y = `Friendly Amount`, color = factor(`Aggressive Ratio`))) +
+  stat_summary(fun = mean, geom = "line") +
+  xlim(0,50) + 
+  geom_hline(yintercept = friendly_mean, linetype="dotted") +
+  annotate("text", x = max(df$Generation), y = friendly_mean, label = round(friendly_mean, 2), hjust = 1.5) +
+  labs(title = "Mean friendly amount over generations",
+       x = "Generation",
+       y = "Mean friendly amount",
+       color = "Aggressive Ratio") +
+  theme_minimal()
+plot7
+
