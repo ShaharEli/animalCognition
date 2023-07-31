@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.fe5dd29f.css",
-    "main.js": "/static/js/main.1d27e176.js",
-    "index.html": "/index.html",
-    "main.fe5dd29f.css.map": "/static/css/main.fe5dd29f.css.map",
-    "main.1d27e176.js.map": "/static/js/main.1d27e176.js.map"
+    "main.css": "/ShaharEli/animalCognition/static/css/main.fe5dd29f.css",
+    "main.js": "/ShaharEli/animalCognition/static/js/main.1d27e176.js",
+    "index.html": "/ShaharEli/animalCognition/index.html",
+    "main.fe5dd29f.css.map": "/ShaharEli/animalCognition/static/css/main.fe5dd29f.css.map",
+    "main.1d27e176.js.map": "/ShaharEli/animalCognition/static/js/main.1d27e176.js.map"
   },
   "entrypoints": [
     "static/css/main.fe5dd29f.css",
