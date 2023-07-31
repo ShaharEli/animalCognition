@@ -53,20 +53,16 @@ const App = () => {
   return (
     <div className="text-xl font-heebo">
       <div className="flex gap-3 mb-4 items-center justify-center">
-        {mode === "data" && (
-          <div
-            className={`cursor-pointer p-4 mt-4 flex justify-center
-            ${mode !== "data" ? "mx-auto" : "mx-2"}  
-            items-center bg-gray-600 w-fit h-fit text-white`}
-            onClick={exportData}
-          >
-            Download
-          </div>
-        )}
         <div
-          className={`cursor-pointer p-4 ${
-            mode === "simulation" ? "mx-auto" : "mx-2"
-          } mt-4 flex justify-center items-center bg-gray-600 w-fit h-fit text-white`}
+          className={`cursor-pointer p-4 mt-4 flex justify-center
+            mx-2
+            items-center bg-gray-600 w-fit h-fit text-white`}
+          onClick={exportData}
+        >
+          Download
+        </div>
+        <div
+          className={`cursor-pointer p-4 $ mt-4 flex justify-center items-center bg-gray-600 w-fit h-fit text-white`}
           onClick={async () => {
             setData({});
             setGeneration(1);
@@ -89,6 +85,7 @@ const App = () => {
           ref={rateRef}
           onChange={(e) => {
             setGeneration(1);
+            setData({});
             setRate(Number(e.target.value) / 100);
           }}
         />
