@@ -1,5 +1,5 @@
 import Simulation from "Simulation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import uuid from "react-uuid";
 import { IData } from "types";
 import { useImmer } from "use-immer";
@@ -17,6 +17,12 @@ const App = () => {
   const [generation, setGeneration] = useState(1);
   const [rate, setRate] = useState(0);
   const [mode, setMode] = useState<Mode>("simulation");
+
+  const rateRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    rateRef?.current?.focus();
+  }, []);
 
   const exportData = () => {
     const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
@@ -80,6 +86,7 @@ const App = () => {
           placeholder={`${rate * 100}%`}
           className="p-1 w-12"
           type="number"
+          ref={rateRef}
           onChange={(e) => {
             setGeneration(1);
             setRate(Number(e.target.value) / 100);
