@@ -70,6 +70,7 @@ function Simulation({
       <h2 className="mx-auto my-2 text-center">Gen: {generation}</h2>
       <div className="">
         <Canvas
+          setData={setData}
           isSimulation={isSimulation}
           onDataMode={onDataMode && !isSimulation}
           population={population}

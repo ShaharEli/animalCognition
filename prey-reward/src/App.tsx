@@ -109,6 +109,7 @@ const App = () => {
             generation={generation}
             setGeneration={setGeneration}
             rate={rate}
+            isSimulation
             trackingSimulation={true}
           />
         )}

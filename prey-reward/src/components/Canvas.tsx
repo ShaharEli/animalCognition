@@ -2,6 +2,7 @@ import { Creature } from "classes";
 import { Food } from "classes/Food";
 import { Population } from "classes/Population";
 import React, { useCallback, useEffect, useRef } from "react";
+import { CreatureType } from "types";
 
 interface IProps {
   population: Population;
@@ -10,6 +11,7 @@ interface IProps {
   onDataMode: boolean;
   trackingSimulation?: boolean;
   isSimulation?: boolean;
+  setData: any;
 }
 const Canvas = ({
   population,
@@ -18,6 +20,7 @@ const Canvas = ({
   onDataMode,
   trackingSimulation,
   isSimulation,
+  setData,
 }: IProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const draw = useCallback(
@@ -32,6 +35,20 @@ const Canvas = ({
         population.draw(ctx);
         population.placeRandom(ctx);
         population.decide();
+        if (isSimulation) {
+          setData({
+            "1": [
+              {
+                aggressive_amount: population.creatures.filter(
+                  (c) => c.getType() === CreatureType.Aggressive
+                ).length,
+                friendly_amount: population.creatures.filter(
+                  (c) => c.getType() === CreatureType.NonAggressive
+                ).length,
+              },
+            ],
+          });
+        }
         await new Promise((resolve) => {
           if (trackingSimulation) {
             setGeneration((p: number) => p + 1);
