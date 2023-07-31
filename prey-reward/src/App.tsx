@@ -67,7 +67,7 @@ const App = () => {
             setMode((p) => (p === "data" ? "simulation" : "data"));
           }}
         >
-          switch to {mode === "simulation" ? "data" : "simulation"} mode
+          Switch to {mode === "simulation" ? "data" : "simulation"} mode
         </div>
       </div>
       <div>
