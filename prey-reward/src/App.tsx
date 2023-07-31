@@ -1,4 +1,5 @@
 import Simulation from "Simulation";
+import { useDebounce } from "hooks/useDebounce";
 import { useEffect, useRef, useState } from "react";
 import uuid from "react-uuid";
 import { IData } from "types";
@@ -17,7 +18,7 @@ const App = () => {
   const [generation, setGeneration] = useState(1);
   const [rate, setRate] = useState(0);
   const [mode, setMode] = useState<Mode>("simulation");
-
+  const debouncedData = useDebounce(data, 500);
   const rateRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -93,11 +94,12 @@ const App = () => {
         />
       </div>
       <div className="mx-2">rate: {rate}</div>
-      {mode === "simulation" && data[1] && data[1].length && (
+      {mode === "simulation" && debouncedData[1] && debouncedData[1].length && (
         <div className="mx-2">
           previous aggressive count:{" "}
-          {data[1]![data[1].length - 1].aggressive_amount}, previous friendly
-          count: {data[1]![data[1].length - 1].friendly_amount}
+          {debouncedData[1]![debouncedData[1].length - 1].aggressive_amount},
+          previous friendly count:{" "}
+          {debouncedData[1]![debouncedData[1].length - 1].friendly_amount}
         </div>
       )}
       <div className="flex flex-wrap justify-center items-center gap-10 ">

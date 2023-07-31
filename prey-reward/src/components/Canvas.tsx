@@ -35,29 +35,37 @@ const Canvas = ({
         population.draw(ctx);
         population.placeRandom(ctx);
         population.decide();
-        if (isSimulation) {
-          setData({
-            "1": [
-              {
-                aggressive_amount: population.creatures.filter(
-                  (c) => c.getType() === CreatureType.Aggressive
-                ).length,
-                friendly_amount: population.creatures.filter(
-                  (c) => c.getType() === CreatureType.NonAggressive
-                ).length,
-              },
-            ],
-          });
-        }
+
         await new Promise((resolve) => {
           if (trackingSimulation) {
             setGeneration((p: number) => p + 1);
+            if (isSimulation) {
+              setData({
+                "1": [
+                  {
+                    aggressive_amount: population.creatures.filter(
+                      (c) => c.getType() === CreatureType.Aggressive
+                    ).length,
+                    friendly_amount: population.creatures.filter(
+                      (c) => c.getType() === CreatureType.NonAggressive
+                    ).length,
+                  },
+                ],
+              });
+            }
           }
           setTimeout(resolve, onDataMode ? 2 : 2000);
         });
       }
     },
-    [food, onDataMode, population, setGeneration, trackingSimulation]
+    [
+      food,
+      isSimulation,
+      onDataMode,
+      population,
+      setGeneration,
+      trackingSimulation,
+    ]
   );
 
   useEffect(() => {
