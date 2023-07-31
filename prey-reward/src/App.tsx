@@ -53,14 +53,16 @@ const App = () => {
   return (
     <div className="text-xl font-heebo">
       <div className="flex gap-3 mb-4 items-center justify-center">
-        <div
-          className={`cursor-pointer p-4 mt-4 flex justify-center
-            mx-2
-            items-center bg-gray-600 w-fit h-fit text-white`}
-          onClick={exportData}
-        >
-          Download
-        </div>
+        {mode === "data" && (
+          <div
+            className={`cursor-pointer p-4 mt-4 flex justify-center
+        mx-2
+        items-center bg-gray-600 w-fit h-fit text-white`}
+            onClick={exportData}
+          >
+            Download
+          </div>
+        )}
         <div
           className={`cursor-pointer p-4 $ mt-4 flex justify-center items-center bg-gray-600 w-fit h-fit text-white`}
           onClick={async () => {
@@ -103,8 +105,7 @@ const App = () => {
           <Simulation
             id="1"
             setData={setData}
-            onDataMode={true}
-            isSimulation
+            onDataMode={false}
             generation={generation}
             setGeneration={setGeneration}
             rate={rate}
