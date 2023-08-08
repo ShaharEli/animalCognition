@@ -90,6 +90,7 @@ const Canvas = ({
       window.cancelAnimationFrame(animationFrameId);
     };
   }, [population, food, draw]);
+
   return (
     <canvas
       width={isSimulation ? 650 : 500}

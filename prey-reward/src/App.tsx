@@ -8,15 +8,20 @@ import { useImmer } from "use-immer";
 const IS_ON_DATA_MODE = true;
 const AUTO_DOWNLOAD = false;
 const SIMULATIONS_AMOUNT = 12;
-
+const RATE = "rate";
 const ids = new Array(SIMULATIONS_AMOUNT).fill(0).map(uuid);
 const DATA_SIZE = 400;
 const RATE_INCREMENT = 0.05;
 type Mode = "data" | "simulation";
+
+let timeOutId: ReturnType<typeof setTimeout>;
+
 const App = () => {
   const [data, setData] = useImmer({} as Record<string, IData[]>);
   const [generation, setGeneration] = useState(1);
-  const [rate, setRate] = useState(0);
+  const [rate, setRate] = useState(
+    localStorage.getItem(RATE) ? Number(localStorage.getItem(RATE)) : 0
+  );
   const [mode, setMode] = useState<Mode>("simulation");
   const debouncedData = useDebounce(data, 800);
   const rateRef = useRef<HTMLInputElement>(null);
@@ -91,6 +96,12 @@ const App = () => {
             setGeneration(1);
             setData({});
             setRate(Number(e.target.value) / 100);
+
+            if ((timeOutId as ReturnType<typeof setTimeout>) !== undefined) {
+              clearTimeout(timeOutId);
+            }
+            localStorage.setItem(RATE, `${Number(e.target.value) / 100}`);
+            timeOutId = setTimeout(() => window.location.reload(), 800);
           }}
         />
       </div>
