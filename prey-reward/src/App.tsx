@@ -95,6 +95,10 @@ const App = () => {
         />
       </div>
       <div className="mx-2">rate: {rate}</div>
+      {mode === "simulation" &&
+        (!debouncedData[1] || !debouncedData[1].length) && (
+          <div className="h-[28px]"></div>
+        )}
       {mode === "simulation" && debouncedData[1] && debouncedData[1].length && (
         <div className="mx-2">
           previous aggressive count:{" "}
