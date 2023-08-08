@@ -1,7 +1,7 @@
 import { Food } from "classes/Food";
 import { Population } from "classes/Population";
 import Canvas from "components/Canvas";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { CreatureType, IData } from "types";
 import { Updater } from "use-immer";
 
@@ -64,6 +64,7 @@ function Simulation({
         data[id] = [payload];
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [generation, onDataMode, id, setData, population]);
   return (
     <div className="">

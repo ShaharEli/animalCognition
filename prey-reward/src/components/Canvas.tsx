@@ -1,4 +1,3 @@
-import { Creature } from "classes";
 import { Food } from "classes/Food";
 import { Population } from "classes/Population";
 import React, { useCallback, useEffect, useRef } from "react";
@@ -58,6 +57,7 @@ const Canvas = ({
         });
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       food,
       isSimulation,

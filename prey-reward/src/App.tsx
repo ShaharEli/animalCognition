@@ -18,7 +18,7 @@ const App = () => {
   const [generation, setGeneration] = useState(1);
   const [rate, setRate] = useState(0);
   const [mode, setMode] = useState<Mode>("simulation");
-  const debouncedData = useDebounce(data, 500);
+  const debouncedData = useDebounce(data, 800);
   const rateRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -49,6 +49,7 @@ const App = () => {
       setGeneration(1);
       setData({});
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [generation]);
 
   return (
